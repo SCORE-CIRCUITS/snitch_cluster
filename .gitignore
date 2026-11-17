@@ -32,3 +32,4 @@ gmon.out
 /tools/
 /build/
 /snitch.egg-info/
+/install/

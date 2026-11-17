@@ -21,7 +21,7 @@ SN_VLT_FESVR    = $(SN_VLT_BUILDDIR)/riscv-isa-sim
 SN_VLT_BENDER_FLAGS += $(SN_COMMON_BENDER_FLAGS) -t verilator -DASSERTS_OFF
 SN_VLT_FLAGS += --timing
 SN_VLT_FLAGS += --timescale 1ns/1ps
-SN_VLT_FLAGS += --trace-vcd
+SN_VLT_FLAGS += --trace
 SN_VLT_FLAGS += --no-assert-case
 SN_VLT_FLAGS += -Wno-BLKANDNBLK
 SN_VLT_FLAGS += -Wno-LITENDIAN
@@ -56,6 +56,7 @@ $(SN_BIN_DIR)/$(TARGET)_bin.vlt: $(SN_TB_CC_SOURCES) $(SN_VLT_CC_SOURCES) $(SN_W
 		-CFLAGS -std=c++20 \
 		-CFLAGS -I$(SN_WORK_DIR)/include \
 		-CFLAGS -I$(SN_TB_DIR) \
+		-CFLAGS -Wno-error \
 		-j $(SN_VLT_JOBS) \
 		-o $@ --cc --exe --build --top-module $(SN_VLT_TOP_MODULE) \
 		$(SN_TB_CC_SOURCES) $(SN_VLT_CC_SOURCES) $(SN_WORK_DIR)/lib/libfesvr.a | tee $(SN_VLT_BUILDDIR)/verilator.log

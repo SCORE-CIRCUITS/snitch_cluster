@@ -810,10 +810,7 @@ module snitch_cluster
   // i.e. they are handled outside of the cluster, e.g. in the NoC router
   typedef bit [DmaXbarCfg.NoMstPorts-1:0] wide_mst_connectivity_t;
   typedef wide_mst_connectivity_t [DmaXbarCfg.NoSlvPorts-1:0] wide_xbar_connectivity_t;
-  localparam wide_mst_connectivity_t WideMstCollectiveConnectivity = wide_mst_connectivity_t'{
-    SoCDMAOut: 1'b1,
-    default: 1'b0
-  };
+  localparam wide_mst_connectivity_t WideMstCollectiveConnectivity = wide_mst_connectivity_t'(1 << SoCDMAOut);
   localparam wide_xbar_connectivity_t DmaCollectiveConnectivity = wide_xbar_connectivity_t'{
     default: WideMstCollectiveConnectivity
   };
@@ -1519,10 +1516,7 @@ module snitch_cluster
   // i.e. they are handled outside of the cluster, e.g. in the NoC router
   typedef bit [ClusterXbarCfg.NoMstPorts-1:0] narrow_mst_connectivity_t;
   typedef narrow_mst_connectivity_t [ClusterXbarCfg.NoSlvPorts-1:0] xbar_connectivity_t;
-  localparam narrow_mst_connectivity_t MasterCollectiveConnectivity = narrow_mst_connectivity_t'{
-    SoC: 1'b1,
-    default: 1'b0
-  };
+  localparam narrow_mst_connectivity_t MasterCollectiveConnectivity = narrow_mst_connectivity_t'(1 << SoC);
   localparam xbar_connectivity_t ClusterCollectiveConnectivity = xbar_connectivity_t'{
     default: MasterCollectiveConnectivity
   };
